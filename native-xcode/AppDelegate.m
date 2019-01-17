@@ -52,13 +52,57 @@
 }
 
 + (NSString*)pathForNodeJSProject {
-    NSObject *libraryPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
-    return [NSString stringWithFormat:@"%@/nodejs-project", libraryPath];
+    NSObject *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    return [NSString stringWithFormat:@"%@/nodejs-project", rootPath];
+}
+
++ (NSDate*)dateOf:(NSString*)path {
+    NSDictionary* attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
+
+    if (attributes == nil) {
+        return nil;
+    }
+
+    return (NSDate*)[attributes objectForKey: NSFileModificationDate];
 }
 
 + (void)deployNodeJSProject:(void (^)(void))completion {
+    NSString* zipFile = [[NSBundle mainBundle] pathForResource:@"nodejs-project.zip" ofType:@""];
+    NSString* destination = [AppDelegate pathForNodeJSProject];
+
+    // Copy process is changing date
+//    NSDate* zipDate = [self dateOf: zipFile];
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss\n"];
+
+    // TODO: trim
+    NSDate *zipDate = [dateFormatter dateFromString:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"nodejs-project.zip.lastModified" ofType:@""] encoding:NSUTF8StringEncoding error:nil]];
+
+    NSDate *destinationDate = [self dateOf: destination];
+    if ([destinationDate compare: zipDate] == NSOrderedDescending || [destinationDate compare: zipDate] == NSOrderedSame) {
+        NSLog(@"Nodejs-project up to date.");
+        completion();
+        return;
+    }
+
+    NSLog(@"%@ newer than %@", zipDate, destinationDate);
+    NSLog(@"Updating nodejs-project...");
+    NSLog(@"From %@ to %@", zipFile, destination);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [SSZipArchive unzipFileAtPath:[[NSBundle mainBundle] pathForResource:@"nodejs-project.zip" ofType:@""] toDestination:[AppDelegate pathForNodeJSProject]];
+        [[NSFileManager defaultManager] removeItemAtPath:destination error:nil];
+
+        [SSZipArchive unzipFileAtPath:zipFile toDestination:destination];
+
+        if (zipDate != nil) {
+            NSError* error = nil;
+            NSDictionary* attributes = [NSDictionary dictionaryWithObject:zipDate forKey:NSFileModificationDate];
+            [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:destination error:&error];
+            if (error != nil) {
+                NSLog(@"While updating Last Modified of destination nodejs-project: %@", error);
+            }
+        } else {
+            NSLog(@"While updating Last Modified of destination nodejs-project: no zip date");
+        }
 
         dispatch_sync(dispatch_get_main_queue(), ^{
             completion();
@@ -68,7 +112,7 @@
 
 + (void)startNodeRed:(void (^)(void))completion {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        //    NSString* srcPath = [[NSBundle mainBundle] pathForResource:@"nodejs-project/node_modules/node-red/red.js" ofType:@""];
+//        NSString* srcPath = [NSString stringWithFormat:@"%@/node_modules/node-red/red.js", [AppDelegate pathForNodeJSProject]];
         NSString* srcPath = [NSString stringWithFormat:@"%@/main.js", [AppDelegate pathForNodeJSProject]];
         NSObject *documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
 
@@ -86,6 +130,8 @@
                                   documentPath,
                                   nil
                                   ];
+        NSLog(@"Starting node engine with arguments: %@", nodeArguments);
+
         [NodeRunner startEngineWithArguments:nodeArguments];
 
         dispatch_sync(dispatch_get_main_queue(), ^{

@@ -31,9 +31,9 @@
 		3C1A8F4221EFD557007D235D /* NodeMobile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1A8F4021EFD557007D235D /* NodeMobile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C1A8F4621EFD5A0007D235D /* NodeRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A8F4521EFD5A0007D235D /* NodeRunner.m */; };
 		3C1A8F6921EFDB93007D235D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1A8F6821EFDB93007D235D /* WebKit.framework */; };
+		3C2422AE21F0B7DB0027E84D /* nodejs-project.zip.lastModified in Resources */ = {isa = PBXBuildFile; fileRef = 3C2422AD21F0B7DB0027E84D /* nodejs-project.zip.lastModified */; };
 		3C4C475621F04739007C9F6D /* nodejs-project.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3C4C475521F04739007C9F6D /* nodejs-project.zip */; };
 		3C4C475921F048F1007C9F6D /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4C475821F048F1007C9F6D /* ZipArchive.framework */; };
-		3CB167AE21F0089A006D9D7A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CB167AD21F0089A006D9D7A /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +76,7 @@
 		3C1A8F4521EFD5A0007D235D /* NodeRunner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeRunner.m; sourceTree = "<group>"; };
 		3C1A8F6521EFD7F9007D235D /* nodejs-project */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "nodejs-project"; sourceTree = "<group>"; };
 		3C1A8F6821EFDB93007D235D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		3C2422AD21F0B7DB0027E84D /* nodejs-project.zip.lastModified */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "nodejs-project.zip.lastModified"; sourceTree = "<group>"; };
 		3C4C475221F04655007C9F6D /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		3C4C475521F04739007C9F6D /* nodejs-project.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "nodejs-project.zip"; sourceTree = "<group>"; };
 		3C4C475821F048F1007C9F6D /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZipArchive.framework; path = Carthage/Build/iOS/ZipArchive.framework; sourceTree = "<group>"; };
@@ -103,6 +104,7 @@
 				3CB167AD21F0089A006D9D7A /* README.md */,
 				3C1A8F6521EFD7F9007D235D /* nodejs-project */,
 				3C4C475521F04739007C9F6D /* nodejs-project.zip */,
+				3C2422AD21F0B7DB0027E84D /* nodejs-project.zip.lastModified */,
 				3C1A8F4021EFD557007D235D /* NodeMobile.framework */,
 				3C1A8F2921EFD4FF007D235D /* native-xcode */,
 				3C1A8F2821EFD4FF007D235D /* Products */,
@@ -209,9 +211,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C2422AE21F0B7DB0027E84D /* nodejs-project.zip.lastModified in Resources */,
 				3C4C475621F04739007C9F6D /* nodejs-project.zip in Resources */,
 				3C1A8F3721EFD501007D235D /* LaunchScreen.storyboard in Resources */,
-				3CB167AE21F0089A006D9D7A /* README.md in Resources */,
 				3C1A8F3421EFD501007D235D /* Assets.xcassets in Resources */,
 				3C1A8F3221EFD4FF007D235D /* Main.storyboard in Resources */,
 			);
@@ -235,7 +237,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd nodejs-project/\n/usr/bin/zip -ur ../nodejs-project.zip *\n\n#TODO detect no updates vs error\nexit 0\n";
+			shellScript = "cd nodejs-project/\n/usr/bin/zip -ur ../nodejs-project.zip *\n\ncd ..\ndate -r nodejs-project.zip \"+%Y-%m-%d %H:%M:%S\" > nodejs-project.zip.lastModified\n\n#TODO detect no updates vs error\nexit 0\n";
 		};
 		3C4C475721F04760007C9F6D /* Embed Carthage Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
