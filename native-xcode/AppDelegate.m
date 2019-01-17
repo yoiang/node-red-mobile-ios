@@ -10,6 +10,8 @@
 
 #import "NodeRunner.h"
 
+@import ZipArchive;
+
 @interface AppDelegate ()
 
 @end
@@ -18,16 +20,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    NSThread* nodejsThread = nil;
-    nodejsThread = [[NSThread alloc]
-                    initWithTarget:self
-                    selector:@selector(startNodeRed)
-                    object:nil
-                    ];
-    // Set 2MB of stack space for the Node.js thread.
-    [nodejsThread setStackSize:2*1024*1024];
-    [nodejsThread start];
     
     return YES;
 }
@@ -59,33 +51,90 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)startNodeExample {
-    NSString* srcPath = [[NSBundle mainBundle] pathForResource:@"nodejs-project/main.js" ofType:@""];
-    NSArray* nodeArguments = [NSArray arrayWithObjects:
-                              @"node",
-                              srcPath,
-                              nil
-                              ];
-    [NodeRunner startEngineWithArguments:nodeArguments];
++ (NSString*)pathForNodeJSProject {
+    NSObject *libraryPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
+    return [NSString stringWithFormat:@"%@/nodejs-project", libraryPath];
 }
 
-- (void)startNodeRed {
-    NSString* srcPath = [[NSBundle mainBundle] pathForResource:@"nodejs-project/node_modules/node-red/red.js" ofType:@""];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
++ (void)deployNodeJSProject:(void (^)(void))completion {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [SSZipArchive unzipFileAtPath:[[NSBundle mainBundle] pathForResource:@"nodejs-project.zip" ofType:@""] toDestination:[AppDelegate pathForNodeJSProject]];
 
-    NSArray* nodeArguments = [NSArray arrayWithObjects:
-                              @"node",
-                              srcPath,
-                              @"--userDir",
-                              [NSString stringWithFormat:@"%@/.node-red/", [paths objectAtIndex:0]],
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            completion();
+        });
+    });
+}
+
++ (void)startNodeRed:(void (^)(void))completion {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //    NSString* srcPath = [[NSBundle mainBundle] pathForResource:@"nodejs-project/node_modules/node-red/red.js" ofType:@""];
+        NSString* srcPath = [NSString stringWithFormat:@"%@/main.js", [AppDelegate pathForNodeJSProject]];
+        NSObject *documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+
+        NSArray* nodeArguments = [NSArray arrayWithObjects:
+                                  @"node",
+                                  srcPath,
+                                  @"--userDir",
+                                  [NSString stringWithFormat:@"%@/.node-red/", documentPath],
 #if TARGET_IPHONE_SIMULATOR
 #else
-                              @"--settings",
-                              [[NSBundle mainBundle] pathForResource:@"nodejs-project/deviceSettings.js" ofType:@""],
+                                  @"--settings",
+                                  [[NSBundle mainBundle] pathForResource:@"nodejs-project/deviceSettings.js" ofType:@""],
 #endif
-                              nil
-                              ];
-    [NodeRunner startEngineWithArguments:nodeArguments];
+                                  @"--mobileDocumentDir",
+                                  documentPath,
+                                  nil
+                                  ];
+        [NodeRunner startEngineWithArguments:nodeArguments];
+
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            completion();
+        });
+    });
+
+}
+
++ (void)monitorFile:(NSString*)filePath notify:(void (^)(NSString*))notify {
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+
+    NSString* path = [filePath stringByDeletingLastPathComponent];
+    int folderId = open([path UTF8String], O_EVTONLY);
+    __block dispatch_source_t folder = dispatch_source_create(DISPATCH_SOURCE_TYPE_VNODE, folderId, DISPATCH_VNODE_WRITE, queue);
+
+    // call the passed block if the source is modified
+    dispatch_source_set_event_handler(folder, ^{
+        int fileId = open([filePath UTF8String], O_EVTONLY);
+        if (fileId == -1) {
+            return;
+        }
+
+        dispatch_source_cancel(folder);
+
+//        __block typeof(self) blockSelf = self;
+        __block dispatch_source_t source = dispatch_source_create(DISPATCH_SOURCE_TYPE_VNODE, fileId, DISPATCH_VNODE_DELETE, queue);
+        dispatch_source_set_event_handler(source, ^{
+            unsigned long flags = dispatch_source_get_data(source);
+            if(flags & DISPATCH_VNODE_DELETE)
+            {
+                dispatch_source_cancel(source);
+
+                notify(path);
+                //            [blockSelf monitorFile:path notify:notify];
+            }
+        });
+        dispatch_source_set_cancel_handler(source, ^(void) {
+            close(fileId);
+        });
+        dispatch_resume(source);
+    });
+
+    // close the file descriptor when the dispatch source is cancelled
+    dispatch_source_set_cancel_handler(folder, ^{
+        close(folderId);
+    });
+
+    dispatch_resume(folder);
 }
 
 @end

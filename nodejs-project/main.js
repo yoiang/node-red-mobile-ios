@@ -1,5 +1,59 @@
 var http = require('http');
-var versions_server = http.createServer( (request, response) => {
-  response.end('Versions: ' + JSON.stringify(process.versions));
+var express = require("express");
+var RED = require("node-red");
+
+var nodejsProcess = require('./process');
+
+var programArguments = require('minimist')(process.argv.slice(2));
+var mobileDocumentDir = programArguments.mobileDocumentDir;
+
+// Create an Express app
+var app = express();
+
+// Add a simple route for static content served from 'public'
+app.use("/", express.static("public"));
+
+// Create a server
+var server = http.createServer(app);
+
+// Create the settings object - see default settings.js file for other options
+// var settings = {
+//     httpAdminRoot:"/red",
+//     httpNodeRoot: "/api",
+//     userDir:"/home/nol/.nodered/",
+//     functionGlobalContext: { }    // enables global context
+// };
+
+console.log("Running Node-RED with the settings:", programArguments);
+
+var nodeRedBootTrackingName = "Node-RED.booting";
+
+// TODO: use temporary or cache folder
+nodejsProcess.emptyTrackingFolder(mobileDocumentDir)
+.then(function() {
+    return nodejsProcess.createTrackingFile(mobileDocumentDir, nodeRedBootTrackingName)    
+})
+.then(function() {
+    // Initialise the runtime with a server and settings
+    RED.init(server, programArguments);
+
+    // Serve the editor UI from /red
+    app.use("/", RED.httpAdmin);
+
+    // Serve the http nodes UI from /api
+    app.use("/api", RED.httpNode);
+
+    server.listen(1880);
+    return RED.start();
+})
+.then(function() {
+    nodejsProcess.removeTrackingFile(mobileDocumentDir, nodeRedBootTrackingName);
+    console.log("Node-RED started");
+})
+.catch(function(reason) {
+    console.error("While starting:", reason);
 });
-versions_server.listen(3000);
+
+
+
+

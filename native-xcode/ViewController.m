@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
 
 @interface ViewController (WKNavigationDelegate)
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error;
@@ -25,7 +26,27 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    [self browseToNodeRed];
+    [self.loadingView startAnimating];
+
+    [self monitorNodeREDBoot];
+
+    [AppDelegate deployNodeJSProject:^{
+        NSThread* nodejsThread = nil;
+        nodejsThread = [[NSThread alloc]
+                        initWithTarget:self
+                        selector:@selector(startNodeRed)
+                        object:nil
+                        ];
+        // Set 2MB of stack space for the Node.js thread.
+        [nodejsThread setStackSize:2*1024*1024];
+        [nodejsThread start];
+    }];
+}
+
+- (void)startNodeRed {
+    [AppDelegate startNodeRed:^{
+        NSLog(@"NodeJS finished");
+    }];
 }
 
 - (IBAction)myButtonAction:(id)sender
@@ -45,6 +66,17 @@
     [self browseToNodeRed];
 }
 
+- (void)monitorNodeREDBoot {
+    NSObject *documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString* path = [NSString stringWithFormat:@"%@/process/tracking/Node-RED.booting.tracking", documentPath];
+
+    [AppDelegate monitorFile:path notify:^(NSString* path) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self browseToNodeRed];
+        });
+    }];
+}
+
 - (void)browseToNodeRed {
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://127.0.0.1:1880"]]];
 }
@@ -59,4 +91,9 @@
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     NSLog(@"Failed navigation: %@", error);
 }
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    [self.loadingView stopAnimating];
+}
+
 @end

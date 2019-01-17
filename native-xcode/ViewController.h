@@ -11,6 +11,8 @@
 
 @interface ViewController : UIViewController<WKNavigationDelegate>
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingView;
+
 @property (weak, nonatomic) IBOutlet UIButton *myButton;
 @property (weak, nonatomic) IBOutlet UITextView *myTextView;
 

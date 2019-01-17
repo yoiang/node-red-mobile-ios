@@ -6,6 +6,10 @@
     "author": "janeasystems",
     "license": "",
     "dependencies": {
-        "node-red": "^0.19.5"
+        "express": "^4.16.4",
+        "minimist": "^1.2.0",
+        "mkdirp": "^0.5.1",
+        "node-red": "^0.19.5",
+        "when": "^3.7.8"
     }
 }

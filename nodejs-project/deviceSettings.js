@@ -4,4 +4,4 @@ module.exports = {
             editable: false
         }
     }
-}
+};
