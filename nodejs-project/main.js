@@ -6,6 +6,13 @@ var nodejsProcess = require('./process');
 
 var programArguments = require('minimist')(process.argv.slice(2));
 var mobileDocumentDir = programArguments.mobileDocumentDir;
+delete programArguments.mobileDocumentDir;
+
+var userDir = programArguments.userDir;
+var settingsFile = programArguments.settings;
+
+var settings = require(settingsFile);
+settings.userDir = userDir;
 
 // Create an Express app
 var app = express();
@@ -27,7 +34,7 @@ nodejsProcess.emptyTrackingFolder(mobileDocumentDir)
 })
 .then(function() {
     // Initialise the runtime with a server and settings
-    RED.init(server, programArguments);
+    RED.init(server, settings);
 
     // Serve the editor UI from /red
     app.use("/", RED.httpAdmin);

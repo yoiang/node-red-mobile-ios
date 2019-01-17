@@ -21,17 +21,18 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		3C1A8F2C21EFD4FF007D235D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A8F2B21EFD4FF007D235D /* AppDelegate.m */; };
-		3C1A8F2F21EFD4FF007D235D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A8F2E21EFD4FF007D235D /* ViewController.m */; };
 		3C1A8F3221EFD4FF007D235D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C1A8F3021EFD4FF007D235D /* Main.storyboard */; };
 		3C1A8F3421EFD501007D235D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C1A8F3321EFD501007D235D /* Assets.xcassets */; };
 		3C1A8F3721EFD501007D235D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C1A8F3521EFD501007D235D /* LaunchScreen.storyboard */; };
-		3C1A8F3A21EFD501007D235D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A8F3921EFD501007D235D /* main.m */; };
 		3C1A8F4121EFD557007D235D /* NodeMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1A8F4021EFD557007D235D /* NodeMobile.framework */; };
 		3C1A8F4221EFD557007D235D /* NodeMobile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1A8F4021EFD557007D235D /* NodeMobile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C1A8F4621EFD5A0007D235D /* NodeRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A8F4521EFD5A0007D235D /* NodeRunner.m */; };
 		3C1A8F6921EFDB93007D235D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1A8F6821EFDB93007D235D /* WebKit.framework */; };
 		3C2422AE21F0B7DB0027E84D /* nodejs-project.zip.lastModified in Resources */ = {isa = PBXBuildFile; fileRef = 3C2422AD21F0B7DB0027E84D /* nodejs-project.zip.lastModified */; };
+		3C2422B321F0D9DC0027E84D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2422B121F0D5400027E84D /* ViewController.swift */; };
+		3C2422B521F0DAA30027E84D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2422B421F0DAA30027E84D /* AppDelegate.swift */; };
+		3C2422B721F0E91C0027E84D /* NodeJSProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2422B621F0E91C0027E84D /* NodeJSProject.swift */; };
+		3C2422B921F0E9B60027E84D /* NodeRED.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2422B821F0E9B60027E84D /* NodeRED.swift */; };
 		3C4C475621F04739007C9F6D /* nodejs-project.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3C4C475521F04739007C9F6D /* nodejs-project.zip */; };
 		3C4C475921F048F1007C9F6D /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4C475821F048F1007C9F6D /* ZipArchive.framework */; };
 /* End PBXBuildFile section */
@@ -62,21 +63,21 @@
 
 /* Begin PBXFileReference section */
 		3C1A8F2721EFD4FF007D235D /* native-xcode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "native-xcode.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C1A8F2A21EFD4FF007D235D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		3C1A8F2B21EFD4FF007D235D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3C1A8F2D21EFD4FF007D235D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3C1A8F2E21EFD4FF007D235D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3C1A8F3121EFD4FF007D235D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3C1A8F3321EFD501007D235D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C1A8F3621EFD501007D235D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C1A8F3821EFD501007D235D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3C1A8F3921EFD501007D235D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3C1A8F4021EFD557007D235D /* NodeMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NodeMobile.framework; path = libnode/NodeMobile.framework; sourceTree = "<group>"; };
 		3C1A8F4421EFD57D007D235D /* NodeRunner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeRunner.h; sourceTree = "<group>"; };
 		3C1A8F4521EFD5A0007D235D /* NodeRunner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeRunner.m; sourceTree = "<group>"; };
 		3C1A8F6521EFD7F9007D235D /* nodejs-project */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "nodejs-project"; sourceTree = "<group>"; };
 		3C1A8F6821EFDB93007D235D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3C2422AD21F0B7DB0027E84D /* nodejs-project.zip.lastModified */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "nodejs-project.zip.lastModified"; sourceTree = "<group>"; };
+		3C2422B021F0D53F0027E84D /* native-xcode-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "native-xcode-Bridging-Header.h"; sourceTree = "<group>"; };
+		3C2422B121F0D5400027E84D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3C2422B421F0DAA30027E84D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3C2422B621F0E91C0027E84D /* NodeJSProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeJSProject.swift; sourceTree = "<group>"; };
+		3C2422B821F0E9B60027E84D /* NodeRED.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeRED.swift; sourceTree = "<group>"; };
 		3C4C475221F04655007C9F6D /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		3C4C475521F04739007C9F6D /* nodejs-project.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "nodejs-project.zip"; sourceTree = "<group>"; };
 		3C4C475821F048F1007C9F6D /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZipArchive.framework; path = Carthage/Build/iOS/ZipArchive.framework; sourceTree = "<group>"; };
@@ -123,17 +124,17 @@
 		3C1A8F2921EFD4FF007D235D /* native-xcode */ = {
 			isa = PBXGroup;
 			children = (
-				3C1A8F2A21EFD4FF007D235D /* AppDelegate.h */,
-				3C1A8F2B21EFD4FF007D235D /* AppDelegate.m */,
-				3C1A8F2D21EFD4FF007D235D /* ViewController.h */,
-				3C1A8F2E21EFD4FF007D235D /* ViewController.m */,
+				3C2422B421F0DAA30027E84D /* AppDelegate.swift */,
 				3C1A8F3021EFD4FF007D235D /* Main.storyboard */,
 				3C1A8F3321EFD501007D235D /* Assets.xcassets */,
 				3C1A8F3521EFD501007D235D /* LaunchScreen.storyboard */,
 				3C1A8F3821EFD501007D235D /* Info.plist */,
-				3C1A8F3921EFD501007D235D /* main.m */,
 				3C1A8F4421EFD57D007D235D /* NodeRunner.h */,
 				3C1A8F4521EFD5A0007D235D /* NodeRunner.m */,
+				3C2422B121F0D5400027E84D /* ViewController.swift */,
+				3C2422B021F0D53F0027E84D /* native-xcode-Bridging-Header.h */,
+				3C2422B621F0E91C0027E84D /* NodeJSProject.swift */,
+				3C2422B821F0E9B60027E84D /* NodeRED.swift */,
 			);
 			path = "native-xcode";
 			sourceTree = "<group>";
@@ -181,6 +182,7 @@
 				TargetAttributes = {
 					3C1A8F2621EFD4FE007D235D = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					3C4C474D21F03EDE007C9F6D = {
 						CreatedOnToolsVersion = 10.1;
@@ -266,9 +268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C1A8F2F21EFD4FF007D235D /* ViewController.m in Sources */,
-				3C1A8F3A21EFD501007D235D /* main.m in Sources */,
-				3C1A8F2C21EFD4FF007D235D /* AppDelegate.m in Sources */,
+				3C2422B721F0E91C0027E84D /* NodeJSProject.swift in Sources */,
+				3C2422B921F0E9B60027E84D /* NodeRED.swift in Sources */,
+				3C2422B321F0D9DC0027E84D /* ViewController.swift in Sources */,
+				3C2422B521F0DAA30027E84D /* AppDelegate.swift in Sources */,
 				3C1A8F4621EFD5A0007D235D /* NodeRunner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,6 +422,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3UDY2NT62F;
 				ENABLE_BITCODE = NO;
@@ -434,6 +438,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adorkable.native-xcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "native-xcode/native-xcode-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -442,6 +449,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3UDY2NT62F;
 				ENABLE_BITCODE = NO;
@@ -457,6 +465,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adorkable.native-xcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "native-xcode/native-xcode-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

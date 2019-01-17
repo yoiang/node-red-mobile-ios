@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="native_xcode" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -51,7 +51,7 @@
                                                 </constraints>
                                                 <state key="normal" title="⟳"/>
                                                 <connections>
-                                                    <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qmK-GV-msP"/>
+                                                    <action selector="refreshWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o8c-Qk-2rv"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -83,8 +83,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="loadingView" destination="NTq-ae-qv5" id="auO-Ki-BzH"/>
-                        <outlet property="webView" destination="FRN-Ms-FXN" id="rJY-0M-7lo"/>
+                        <outlet property="loadingView" destination="NTq-ae-qv5" id="nY0-vd-nKL"/>
+                        <outlet property="webView" destination="FRN-Ms-FXN" id="ZkR-T6-SFW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
