@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:native-xcode.xcodeproj">
+      location = "self:/Users/ian/Desktop/Node-RED iOS/native-xcode/Node-RED.xcodeproj">
    </FileRef>
 </Workspace>

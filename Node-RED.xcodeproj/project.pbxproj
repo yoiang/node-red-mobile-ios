@@ -62,7 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3C1A8F2721EFD4FF007D235D /* native-xcode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "native-xcode.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C1A8F2721EFD4FF007D235D /* Node-RED.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Node-RED.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C1A8F3121EFD4FF007D235D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3C1A8F3321EFD501007D235D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C1A8F3621EFD501007D235D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 				3C4C475521F04739007C9F6D /* nodejs-project.zip */,
 				3C2422AD21F0B7DB0027E84D /* nodejs-project.zip.lastModified */,
 				3C1A8F4021EFD557007D235D /* NodeMobile.framework */,
-				3C1A8F2921EFD4FF007D235D /* native-xcode */,
+				3C1A8F2921EFD4FF007D235D /* Node-RED */,
 				3C1A8F2821EFD4FF007D235D /* Products */,
 				3C1A8F6721EFDB92007D235D /* Frameworks */,
 			);
@@ -116,12 +116,12 @@
 		3C1A8F2821EFD4FF007D235D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3C1A8F2721EFD4FF007D235D /* native-xcode.app */,
+				3C1A8F2721EFD4FF007D235D /* Node-RED.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3C1A8F2921EFD4FF007D235D /* native-xcode */ = {
+		3C1A8F2921EFD4FF007D235D /* Node-RED */ = {
 			isa = PBXGroup;
 			children = (
 				3C2422B421F0DAA30027E84D /* AppDelegate.swift */,
@@ -136,7 +136,7 @@
 				3C2422B621F0E91C0027E84D /* NodeJSProject.swift */,
 				3C2422B821F0E9B60027E84D /* NodeRED.swift */,
 			);
-			path = "native-xcode";
+			path = "Node-RED";
 			sourceTree = "<group>";
 		};
 		3C1A8F6721EFDB92007D235D /* Frameworks */ = {
@@ -151,9 +151,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3C1A8F2621EFD4FE007D235D /* native-xcode */ = {
+		3C1A8F2621EFD4FE007D235D /* Node-RED */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3C1A8F3D21EFD501007D235D /* Build configuration list for PBXNativeTarget "native-xcode" */;
+			buildConfigurationList = 3C1A8F3D21EFD501007D235D /* Build configuration list for PBXNativeTarget "Node-RED" */;
 			buildPhases = (
 				3C1A8F2321EFD4FE007D235D /* Sources */,
 				3C1A8F2421EFD4FE007D235D /* Frameworks */,
@@ -166,9 +166,9 @@
 			dependencies = (
 				3C4C475421F04730007C9F6D /* PBXTargetDependency */,
 			);
-			name = "native-xcode";
+			name = "Node-RED";
 			productName = "native-xcode";
-			productReference = 3C1A8F2721EFD4FF007D235D /* native-xcode.app */;
+			productReference = 3C1A8F2721EFD4FF007D235D /* Node-RED.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -189,7 +189,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3C1A8F2221EFD4FE007D235D /* Build configuration list for PBXProject "native-xcode" */;
+			buildConfigurationList = 3C1A8F2221EFD4FE007D235D /* Build configuration list for PBXProject "Node-RED" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -202,7 +202,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3C1A8F2621EFD4FE007D235D /* native-xcode */,
+				3C1A8F2621EFD4FE007D235D /* Node-RED */,
 				3C4C474D21F03EDE007C9F6D /* Prepare nodejs-project */,
 			);
 		};
@@ -431,14 +431,14 @@
 					"$(PROJECT_DIR)/libnode",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "native-xcode/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Node-RED/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.adorkable.native-xcode";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.adorkable.node-red-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "native-xcode/native-xcode-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Node-RED/native-xcode-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -458,14 +458,14 @@
 					"$(PROJECT_DIR)/libnode",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "native-xcode/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Node-RED/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.adorkable.native-xcode";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.adorkable.node-red-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "native-xcode/native-xcode-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Node-RED/native-xcode-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -490,7 +490,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3C1A8F2221EFD4FE007D235D /* Build configuration list for PBXProject "native-xcode" */ = {
+		3C1A8F2221EFD4FE007D235D /* Build configuration list for PBXProject "Node-RED" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3C1A8F3B21EFD501007D235D /* Debug */,
@@ -499,7 +499,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3C1A8F3D21EFD501007D235D /* Build configuration list for PBXNativeTarget "native-xcode" */ = {
+		3C1A8F3D21EFD501007D235D /* Build configuration list for PBXNativeTarget "Node-RED" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3C1A8F3E21EFD501007D235D /* Debug */,
