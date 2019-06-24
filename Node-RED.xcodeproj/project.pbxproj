@@ -183,6 +183,11 @@
 					3C1A8F2621EFD4FE007D235D = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1010;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					3C4C474D21F03EDE007C9F6D = {
 						CreatedOnToolsVersion = 10.1;
