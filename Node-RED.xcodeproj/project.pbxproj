@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -34,7 +34,8 @@
 		3C2422B721F0E91C0027E84D /* NodeJSProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2422B621F0E91C0027E84D /* NodeJSProject.swift */; };
 		3C2422B921F0E9B60027E84D /* NodeRED.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2422B821F0E9B60027E84D /* NodeRED.swift */; };
 		3C4C475621F04739007C9F6D /* nodejs-project.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3C4C475521F04739007C9F6D /* nodejs-project.zip */; };
-		3C4C475921F048F1007C9F6D /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4C475821F048F1007C9F6D /* ZipArchive.framework */; };
+		3CE9B2D52829620400363E16 /* ZipArchive.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE9B2D42829620400363E16 /* ZipArchive.xcframework */; };
+		3CE9B2D62829620400363E16 /* ZipArchive.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE9B2D42829620400363E16 /* ZipArchive.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3CE9B2D62829620400363E16 /* ZipArchive.xcframework in Embed Frameworks */,
 				3C1A8F4221EFD557007D235D /* NodeMobile.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -82,6 +84,7 @@
 		3C4C475521F04739007C9F6D /* nodejs-project.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "nodejs-project.zip"; sourceTree = "<group>"; };
 		3C4C475821F048F1007C9F6D /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZipArchive.framework; path = Carthage/Build/iOS/ZipArchive.framework; sourceTree = "<group>"; };
 		3CB167AD21F0089A006D9D7A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3CE9B2D42829620400363E16 /* ZipArchive.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZipArchive.xcframework; path = Carthage/Build/ZipArchive.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C4C475921F048F1007C9F6D /* ZipArchive.framework in Frameworks */,
 				3C1A8F6921EFDB93007D235D /* WebKit.framework in Frameworks */,
+				3CE9B2D52829620400363E16 /* ZipArchive.xcframework in Frameworks */,
 				3C1A8F4121EFD557007D235D /* NodeMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,6 +145,7 @@
 		3C1A8F6721EFDB92007D235D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3CE9B2D42829620400363E16 /* ZipArchive.xcframework */,
 				3C4C475821F048F1007C9F6D /* ZipArchive.framework */,
 				3C1A8F6821EFDB93007D235D /* WebKit.framework */,
 			);
@@ -159,7 +163,6 @@
 				3C1A8F2421EFD4FE007D235D /* Frameworks */,
 				3C1A8F2521EFD4FE007D235D /* Resources */,
 				3C1A8F4321EFD557007D235D /* Embed Frameworks */,
-				3C4C475721F04760007C9F6D /* Embed Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -240,26 +243,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cd nodejs-project/\n/usr/bin/zip -ur ../nodejs-project.zip *\n\ncd ..\ndate -r nodejs-project.zip \"+%Y-%m-%d %H:%M:%S\" > nodejs-project.zip.lastModified\n\n#TODO detect no updates vs error\nexit 0\n";
-		};
-		3C4C475721F04760007C9F6D /* Embed Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/ZipArchive.framework",
-			);
-			name = "Embed Carthage Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ZipArchive.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -442,6 +425,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -468,6 +452,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Node-RED/native-xcode-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};
